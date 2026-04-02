@@ -1,0 +1,187 @@
+---
+import { getEmDashCollection } from "emdash";
+
+const { entries: plans, cacheHint } = await getEmDashCollection("pricing_plans", {
+	orderBy: { created_at: "asc" },
+});
+---
+
+<section class="pricing section" id="pricing">
+	<div class="container">
+		<div class="section-header reveal" style="text-align: center;">
+			<p class="section-label">Pricing</p>
+			<h2 class="section-title">Simple, transparent pricing</h2>
+			<p class="section-description">
+				Start free. Upgrade when you're ready. No surprise fees, ever.
+			</p>
+		</div>
+
+		<div class="pricing-grid">
+			{plans.map((plan, i) => {
+				const isFeatured = plan.data.is_featured;
+				const featureLines = plan.data.features
+					? plan.data.features.split("\n").filter((l: string) => l.trim())
+					: [];
+				return (
+					<div class={`pricing-card reveal reveal-delay-${(i % 3) + 1} ${isFeatured ? "featured" : ""}`}>
+						{isFeatured && <div class="pricing-badge">Most Popular</div>}
+						<h3 class="pricing-name">{plan.data.name}</h3>
+						<div class="pricing-price">
+							<span class="pricing-amount">{plan.data.price}</span>
+							{plan.data.price !== "Custom" && <span class="pricing-period">/month</span>}
+						</div>
+						<p class="pricing-description">{plan.data.description}</p>
+						<ul class="pricing-features">
+							{featureLines.map((feature: string) => (
+								<li>
+									<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+										<polyline points="20 6 9 17 4 12"></polyline>
+									</svg>
+									{feature.trim()}
+								</li>
+							))}
+						</ul>
+						<a
+							href={plan.data.cta_url || "#"}
+							class={`btn ${isFeatured ? "btn-primary" : "btn-secondary"} pricing-cta`}
+						>
+							{plan.data.cta_text || "Get started"}
+						</a>
+					</div>
+				);
+			})}
+		</div>
+	</div>
+</section>
+
+<style>
+	.section-header {
+		margin-bottom: var(--space-16);
+	}
+
+	.pricing-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--space-8);
+		align-items: start;
+	}
+
+	.pricing-card {
+		position: relative;
+		padding: var(--space-8);
+		background: var(--color-bg);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-xl);
+		display: flex;
+		flex-direction: column;
+		transition: all var(--transition-base);
+	}
+
+	.pricing-card:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--shadow-lg);
+	}
+
+	.pricing-card.featured {
+		border-color: var(--color-primary);
+		box-shadow: var(--shadow-xl), 0 0 40px rgba(59, 130, 246, 0.12);
+		transform: scale(1.05);
+		z-index: 1;
+	}
+
+	.pricing-card.featured:hover {
+		transform: scale(1.05) translateY(-4px);
+	}
+
+	.pricing-badge {
+		position: absolute;
+		top: calc(-1 * var(--space-3));
+		left: 50%;
+		transform: translateX(-50%);
+		padding: var(--space-1) var(--space-4);
+		background: var(--color-accent-gradient);
+		color: white;
+		font-size: var(--text-xs);
+		font-weight: 600;
+		border-radius: var(--radius-full);
+		white-space: nowrap;
+	}
+
+	.pricing-name {
+		font-family: var(--font-heading);
+		font-size: var(--text-xl);
+		font-weight: 600;
+		margin-bottom: var(--space-4);
+	}
+
+	.pricing-price {
+		display: flex;
+		align-items: baseline;
+		gap: var(--space-1);
+		margin-bottom: var(--space-4);
+	}
+
+	.pricing-amount {
+		font-family: var(--font-heading);
+		font-size: var(--text-5xl);
+		font-weight: 700;
+		line-height: 1;
+	}
+
+	.pricing-period {
+		font-size: var(--text-base);
+		color: var(--color-text-muted);
+	}
+
+	.pricing-description {
+		font-size: var(--text-sm);
+		color: var(--color-text-secondary);
+		margin-bottom: var(--space-6);
+		padding-bottom: var(--space-6);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.pricing-features {
+		list-style: none;
+		padding: 0;
+		margin-bottom: var(--space-8);
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3);
+	}
+
+	.pricing-features li {
+		display: flex;
+		align-items: flex-start;
+		gap: var(--space-3);
+		font-size: var(--text-sm);
+		color: var(--color-text-secondary);
+		line-height: var(--leading-normal);
+	}
+
+	.pricing-features li svg {
+		flex-shrink: 0;
+		color: var(--color-success);
+		margin-top: 2px;
+	}
+
+	.pricing-cta {
+		width: 100%;
+		text-align: center;
+	}
+
+	@media (max-width: 1024px) {
+		.pricing-grid {
+			grid-template-columns: 1fr;
+			max-width: 440px;
+			margin-inline: auto;
+		}
+		.pricing-card.featured {
+			transform: none;
+		}
+		.pricing-card.featured:hover {
+			transform: translateY(-4px);
+		}
+	}
+</style>

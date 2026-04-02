@@ -1,0 +1,57 @@
+---
+import { getEmDashEntry, getSeoMeta } from "emdash";
+import { PortableText } from "emdash/ui";
+import Base from "../../layouts/Base.astro";
+
+const { slug } = Astro.params;
+if (!slug) return Astro.redirect("/404");
+
+const { entry: page, cacheHint } = await getEmDashEntry("pages", slug);
+if (!page) return Astro.redirect("/404");
+
+Astro.cache.set(cacheHint);
+
+const seo = getSeoMeta(page, {
+	siteTitle: "Projectflow",
+	siteUrl: Astro.url.origin,
+	path: `/pages/${slug}`,
+});
+---
+
+<Base
+	title={seo.title}
+	description={seo.description}
+	content={{ collection: "pages", id: page.data.id, slug }}
+>
+	<article class="page-content">
+		<div class="container">
+			<header class="page-header">
+				<h1 {...page.edit.title}>{page.data.title}</h1>
+			</header>
+			<div class="portable-text" {...page.edit.content}>
+				<PortableText value={page.data.content} />
+			</div>
+		</div>
+	</article>
+</Base>
+
+<style>
+	.page-content {
+		padding-top: calc(var(--nav-height) + var(--space-16));
+		padding-bottom: var(--space-24);
+	}
+
+	.page-content .container {
+		max-width: var(--content-width);
+	}
+
+	.page-header {
+		margin-bottom: var(--space-10);
+		padding-bottom: var(--space-8);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.page-header h1 {
+		font-size: var(--text-5xl);
+	}
+</style>

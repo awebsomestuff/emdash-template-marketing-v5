@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.wrangler/
+.astro/
+.emdash/
+data.db
+emdash-env.d.ts

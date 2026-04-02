@@ -1,0 +1,448 @@
+---
+import { getMenu, getSiteSettings } from "emdash";
+import { EmDashHead, EmDashBodyStart, EmDashBodyEnd, WidgetArea } from "emdash/ui";
+import { createPublicPageContext } from "emdash/page";
+import "../styles/theme.css";
+
+interface Props {
+	title: string;
+	description?: string | null;
+	image?: string | null;
+	content?: { collection: string; id: string; slug?: string | null };
+}
+
+const { title, description, image, content } = Astro.props;
+const settings = await getSiteSettings();
+const menu = await getMenu("primary");
+
+const siteTitle = settings.title || "Projectflow";
+const fullTitle = title === siteTitle ? title : `${title} — ${siteTitle}`;
+
+const pageCtx = createPublicPageContext({
+	Astro,
+	kind: content ? "content" : "custom",
+	pageType: "website",
+	title: fullTitle,
+	description,
+	image,
+	content,
+});
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{fullTitle}</title>
+		{description && <meta name="description" content={description} />}
+		<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+		<script is:inline>
+			(function () {
+				var c = document.cookie;
+				var i = c.indexOf("theme=");
+				var theme = i >= 0 ? c.slice(i + 6).split(";")[0] : null;
+				if (theme === "dark" || theme === "light") {
+					document.documentElement.classList.add(theme);
+				} else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+					document.documentElement.classList.add("dark");
+				}
+			})();
+		</script>
+		<EmDashHead page={pageCtx} />
+	</head>
+	<body>
+		<EmDashBodyStart page={pageCtx} />
+
+		<header class="site-header">
+			<div class="container header-inner">
+				<a href="/" class="logo">
+					<span class="logo-icon">⚡</span>
+					<span class="logo-text">{siteTitle}</span>
+				</a>
+
+				<nav class="main-nav">
+					{menu?.items.map((item) => (
+						<a href={item.url} class="nav-link">{item.label}</a>
+					))}
+				</nav>
+
+				<div class="header-actions">
+					<button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+						<svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<circle cx="12" cy="12" r="5"></circle>
+							<line x1="12" y1="1" x2="12" y2="3"></line>
+							<line x1="12" y1="21" x2="12" y2="23"></line>
+							<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+							<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+							<line x1="1" y1="12" x2="3" y2="12"></line>
+							<line x1="21" y1="12" x2="23" y2="12"></line>
+							<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+							<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+						</svg>
+						<svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+						</svg>
+					</button>
+					<a href="#pricing" class="btn btn-primary btn-header">Get Started</a>
+				</div>
+
+				<button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+					<span></span>
+					<span></span>
+					<span></span>
+				</button>
+			</div>
+
+			<div class="mobile-menu" id="mobile-menu">
+				<nav class="mobile-nav">
+					{menu?.items.map((item) => (
+						<a href={item.url} class="mobile-nav-link">{item.label}</a>
+					))}
+					<a href="#pricing" class="btn btn-primary" style="margin-top: var(--space-4); width: 100%;">Get Started</a>
+				</nav>
+			</div>
+		</header>
+
+		<main>
+			<slot />
+		</main>
+
+		<footer class="site-footer">
+			<div class="container">
+				<div class="footer-grid">
+					<div class="footer-brand">
+						<a href="/" class="logo">
+							<span class="logo-icon">⚡</span>
+							<span class="logo-text">{siteTitle}</span>
+						</a>
+						<p class="footer-tagline">{settings.tagline || "Ship faster, together."}</p>
+					</div>
+					<div class="footer-links">
+						<h4>Product</h4>
+						{menu?.items.map((item) => (
+							<a href={item.url}>{item.label}</a>
+						))}
+					</div>
+					<div class="footer-links">
+						<h4>Company</h4>
+						<a href="/pages/about">About</a>
+						<a href="/pages/privacy">Privacy Policy</a>
+						<a href="/pages/terms">Terms of Service</a>
+					</div>
+					<div class="footer-widget">
+						<WidgetArea name="footer" />
+					</div>
+				</div>
+				<div class="footer-bottom">
+					<p>&copy; {new Date().getFullYear()} {siteTitle}. All rights reserved.</p>
+					<p class="footer-powered">Powered by <a href="https://emdashcms.com" target="_blank" rel="noopener">EmDash CMS</a></p>
+				</div>
+			</div>
+		</footer>
+
+		<script is:inline>
+			/* Theme Toggle */
+			document.getElementById("theme-toggle")?.addEventListener("click", function () {
+				var html = document.documentElement;
+				var isDark = html.classList.contains("dark");
+				html.classList.remove("dark", "light");
+				var next = isDark ? "light" : "dark";
+				html.classList.add(next);
+				document.cookie = "theme=" + next + ";path=/;max-age=31536000;SameSite=Lax";
+			});
+
+			/* Mobile Menu */
+			document.getElementById("mobile-toggle")?.addEventListener("click", function () {
+				var menu = document.getElementById("mobile-menu");
+				var btn = document.getElementById("mobile-toggle");
+				if (menu && btn) {
+					menu.classList.toggle("open");
+					btn.classList.toggle("open");
+				}
+			});
+
+			/* Scroll Reveal */
+			var observer = new IntersectionObserver(function (entries) {
+				entries.forEach(function (entry) {
+					if (entry.isIntersecting) {
+						entry.target.classList.add("visible");
+						observer.unobserve(entry.target);
+					}
+				});
+			}, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+
+			document.querySelectorAll(".reveal").forEach(function (el) {
+				observer.observe(el);
+			});
+
+			/* Header scroll effect */
+			var header = document.querySelector(".site-header");
+			window.addEventListener("scroll", function () {
+				if (header) {
+					header.classList.toggle("scrolled", window.scrollY > 20);
+				}
+			});
+		</script>
+
+		<EmDashBodyEnd page={pageCtx} />
+	</body>
+</html>
+
+<style>
+	/* --- Header --- */
+	.site-header {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 100;
+		height: var(--nav-height);
+		display: flex;
+		align-items: center;
+		transition: background var(--transition-base), box-shadow var(--transition-base), backdrop-filter var(--transition-base);
+	}
+
+	.site-header.scrolled {
+		background: color-mix(in srgb, var(--color-bg) 85%, transparent);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		box-shadow: var(--shadow-sm);
+		border-bottom: 1px solid var(--color-border-subtle);
+	}
+
+	.header-inner {
+		display: flex;
+		align-items: center;
+		gap: var(--space-8);
+		height: 100%;
+	}
+
+	.logo {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+		font-family: var(--font-heading);
+		font-size: var(--text-xl);
+		font-weight: 700;
+		flex-shrink: 0;
+	}
+
+	.logo-icon {
+		font-size: var(--text-2xl);
+	}
+
+	.main-nav {
+		display: flex;
+		align-items: center;
+		gap: var(--space-1);
+		margin-left: auto;
+	}
+
+	.nav-link {
+		padding: var(--space-2) var(--space-3);
+		font-size: var(--text-sm);
+		font-weight: 500;
+		color: var(--color-text-secondary);
+		border-radius: var(--radius);
+		transition: color var(--transition-fast), background var(--transition-fast);
+	}
+
+	.nav-link:hover {
+		color: var(--color-text);
+		background: var(--color-surface);
+	}
+
+	.header-actions {
+		display: flex;
+		align-items: center;
+		gap: var(--space-3);
+	}
+
+	.btn-header {
+		padding: var(--space-2) var(--space-5);
+		font-size: var(--text-sm);
+	}
+
+	.theme-toggle {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 36px;
+		height: 36px;
+		background: transparent;
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius);
+		cursor: pointer;
+		color: var(--color-text-secondary);
+		transition: all var(--transition-fast);
+	}
+
+	.theme-toggle:hover {
+		color: var(--color-text);
+		background: var(--color-surface);
+	}
+
+	:global(.dark) .icon-sun { display: block; }
+	:global(.dark) .icon-moon { display: none; }
+	:global(:not(.dark)) .icon-sun { display: none; }
+	:global(:not(.dark)) .icon-moon { display: block; }
+
+	/* Mobile Toggle */
+	.mobile-toggle {
+		display: none;
+		flex-direction: column;
+		gap: 5px;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: var(--space-2);
+	}
+
+	.mobile-toggle span {
+		display: block;
+		width: 22px;
+		height: 2px;
+		background: var(--color-text);
+		border-radius: 2px;
+		transition: all var(--transition-base);
+	}
+
+	.mobile-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+	.mobile-toggle.open span:nth-child(2) { opacity: 0; }
+	.mobile-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+	/* Mobile Menu */
+	.mobile-menu {
+		display: none;
+		position: fixed;
+		top: var(--nav-height);
+		left: 0;
+		right: 0;
+		background: var(--color-bg);
+		border-bottom: 1px solid var(--color-border);
+		padding: var(--space-6);
+		transform: translateY(-100%);
+		opacity: 0;
+		transition: all var(--transition-base);
+	}
+
+	.mobile-menu.open {
+		transform: translateY(0);
+		opacity: 1;
+	}
+
+	.mobile-nav {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-1);
+	}
+
+	.mobile-nav-link {
+		padding: var(--space-3) var(--space-4);
+		font-size: var(--text-lg);
+		font-weight: 500;
+		border-radius: var(--radius);
+		transition: background var(--transition-fast);
+	}
+
+	.mobile-nav-link:hover {
+		background: var(--color-surface);
+	}
+
+	@media (max-width: 768px) {
+		.main-nav,
+		.header-actions .btn-header {
+			display: none;
+		}
+		.mobile-toggle {
+			display: flex;
+		}
+		.mobile-menu {
+			display: block;
+		}
+	}
+
+	/* --- Footer --- */
+	.site-footer {
+		border-top: 1px solid var(--color-border);
+		padding-block: var(--space-16);
+		background: var(--color-bg-alt);
+	}
+
+	.footer-grid {
+		display: grid;
+		grid-template-columns: 2fr 1fr 1fr 1fr;
+		gap: var(--space-12);
+		margin-bottom: var(--space-12);
+	}
+
+	.footer-brand .logo {
+		margin-bottom: var(--space-4);
+	}
+
+	.footer-tagline {
+		color: var(--color-text-muted);
+		font-size: var(--text-sm);
+		max-width: 280px;
+	}
+
+	.footer-links {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3);
+	}
+
+	.footer-links h4 {
+		font-family: var(--font-heading);
+		font-size: var(--text-sm);
+		font-weight: 600;
+		margin-bottom: var(--space-2);
+	}
+
+	.footer-links a {
+		font-size: var(--text-sm);
+		color: var(--color-text-muted);
+		transition: color var(--transition-fast);
+	}
+
+	.footer-links a:hover {
+		color: var(--color-primary);
+	}
+
+	.footer-bottom {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding-top: var(--space-8);
+		border-top: 1px solid var(--color-border);
+		font-size: var(--text-sm);
+		color: var(--color-text-muted);
+	}
+
+	.footer-powered a {
+		color: var(--color-primary);
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+	@media (max-width: 768px) {
+		.footer-grid {
+			grid-template-columns: 1fr 1fr;
+			gap: var(--space-8);
+		}
+		.footer-brand {
+			grid-column: 1 / -1;
+		}
+		.footer-bottom {
+			flex-direction: column;
+			gap: var(--space-2);
+			text-align: center;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.footer-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

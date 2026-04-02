@@ -1,0 +1,134 @@
+---
+const benefits = [
+	{
+		label: "Real-time collaboration",
+		title: "Work together, in real time",
+		description: "See your teammates' cursors, edits, and comments as they happen. No more merging conflicts or waiting for updates. Everyone stays in sync, always.",
+		image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop",
+		imageAlt: "Team collaborating on a project",
+	},
+	{
+		label: "Powerful automation",
+		title: "Automate the busywork",
+		description: "Set up custom workflows that move tasks, send notifications, and update statuses automatically. Spend less time on process and more time on what matters.",
+		image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop",
+		imageAlt: "Developer working on automation",
+	},
+	{
+		label: "Deep insights",
+		title: "See the big picture",
+		description: "Track progress across projects with real-time dashboards and reports. Identify bottlenecks before they become problems and make data-driven decisions.",
+		image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+		imageAlt: "Analytics dashboard showing project metrics",
+	},
+];
+---
+
+<section class="benefits section">
+	<div class="container">
+		{benefits.map((benefit, i) => (
+			<div class={`benefit-row reveal ${i % 2 !== 0 ? "reversed" : ""}`}>
+				<div class="benefit-content">
+					<p class="section-label">{benefit.label}</p>
+					<h2 class="benefit-title">{benefit.title}</h2>
+					<p class="benefit-description">{benefit.description}</p>
+					<a href="#pricing" class="benefit-link">
+						Learn more
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<line x1="5" y1="12" x2="19" y2="12"></line>
+							<polyline points="12 5 19 12 12 19"></polyline>
+						</svg>
+					</a>
+				</div>
+				<div class="benefit-visual">
+					<div class="benefit-image-wrapper">
+						<img
+							src={benefit.image}
+							alt={benefit.imageAlt}
+							loading="lazy"
+							width="800"
+							height="600"
+						/>
+					</div>
+				</div>
+			</div>
+		))}
+	</div>
+</section>
+
+<style>
+	.benefit-row {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--space-16);
+		align-items: center;
+		margin-bottom: var(--space-24);
+	}
+
+	.benefit-row:last-child {
+		margin-bottom: 0;
+	}
+
+	.benefit-row.reversed {
+		direction: rtl;
+	}
+
+	.benefit-row.reversed > * {
+		direction: ltr;
+	}
+
+	.benefit-title {
+		font-size: var(--text-4xl);
+		margin-bottom: var(--space-4);
+	}
+
+	.benefit-description {
+		font-size: var(--text-lg);
+		line-height: var(--leading-relaxed);
+		color: var(--color-text-secondary);
+		margin-bottom: var(--space-6);
+	}
+
+	.benefit-link {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-2);
+		font-weight: 600;
+		color: var(--color-primary);
+		transition: gap var(--transition-base);
+	}
+
+	.benefit-link:hover {
+		gap: var(--space-3);
+	}
+
+	.benefit-image-wrapper {
+		border-radius: var(--radius-xl);
+		overflow: hidden;
+		border: 1px solid var(--color-border);
+		box-shadow: var(--shadow-xl);
+		transition: transform var(--transition-slow), box-shadow var(--transition-slow);
+	}
+
+	.benefit-image-wrapper:hover {
+		transform: scale(1.02);
+		box-shadow: var(--shadow-xl), var(--shadow-glow);
+	}
+
+	.benefit-image-wrapper img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	@media (max-width: 768px) {
+		.benefit-row {
+			grid-template-columns: 1fr;
+			gap: var(--space-8);
+			margin-bottom: var(--space-16);
+		}
+		.benefit-row.reversed {
+			direction: ltr;
+		}
+	}
+</style>

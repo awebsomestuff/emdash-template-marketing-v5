@@ -1,0 +1,472 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"meta": {
+		"name": "Marketing Template",
+		"description": "A conversion-focused marketing and landing page template for EmDash CMS",
+		"author": "EmDash"
+	},
+	"settings": {
+		"title": "Projectflow",
+		"tagline": "The modern way to manage projects"
+	},
+	"collections": [
+		{
+			"slug": "pages",
+			"label": "Pages",
+			"labelSingular": "Page",
+			"supports": ["drafts", "revisions", "search", "seo"],
+			"fields": [
+				{ "slug": "title", "label": "Title", "type": "string", "required": true, "searchable": true },
+				{ "slug": "content", "label": "Content", "type": "portableText", "searchable": true }
+			]
+		},
+		{
+			"slug": "features",
+			"label": "Features",
+			"labelSingular": "Feature",
+			"supports": ["drafts"],
+			"fields": [
+				{ "slug": "title", "label": "Title", "type": "string", "required": true },
+				{ "slug": "description", "label": "Description", "type": "text", "required": true },
+				{ "slug": "icon", "label": "Icon", "type": "string" }
+			]
+		},
+		{
+			"slug": "testimonials",
+			"label": "Testimonials",
+			"labelSingular": "Testimonial",
+			"supports": ["drafts"],
+			"fields": [
+				{ "slug": "quote", "label": "Quote", "type": "text", "required": true },
+				{ "slug": "author_name", "label": "Author Name", "type": "string", "required": true },
+				{ "slug": "author_role", "label": "Author Role", "type": "string" },
+				{ "slug": "author_image", "label": "Author Image", "type": "image" }
+			]
+		},
+		{
+			"slug": "pricing_plans",
+			"label": "Pricing Plans",
+			"labelSingular": "Pricing Plan",
+			"supports": ["drafts"],
+			"fields": [
+				{ "slug": "name", "label": "Plan Name", "type": "string", "required": true },
+				{ "slug": "price", "label": "Price", "type": "string", "required": true },
+				{ "slug": "description", "label": "Description", "type": "text" },
+				{ "slug": "features", "label": "Features (one per line)", "type": "text" },
+				{ "slug": "is_featured", "label": "Featured Plan", "type": "boolean" },
+				{ "slug": "cta_text", "label": "CTA Text", "type": "string" },
+				{ "slug": "cta_url", "label": "CTA URL", "type": "string" }
+			]
+		},
+		{
+			"slug": "faqs",
+			"label": "FAQs",
+			"labelSingular": "FAQ",
+			"supports": ["drafts"],
+			"fields": [
+				{ "slug": "question", "label": "Question", "type": "string", "required": true },
+				{ "slug": "answer", "label": "Answer", "type": "text", "required": true }
+			]
+		}
+	],
+	"taxonomies": [],
+	"menus": [
+		{
+			"name": "primary",
+			"label": "Primary Navigation",
+			"items": [
+				{ "type": "custom", "label": "Features", "url": "/#features" },
+				{ "type": "custom", "label": "Pricing", "url": "/#pricing" },
+				{ "type": "custom", "label": "FAQ", "url": "/#faq" },
+				{ "type": "custom", "label": "About", "url": "/pages/about" }
+			]
+		}
+	],
+	"widgetAreas": [
+		{
+			"name": "footer",
+			"label": "Footer",
+			"description": "Widget area in the site footer",
+			"widgets": [
+				{
+					"type": "content",
+					"title": "Newsletter",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "Subscribe to our newsletter for product updates, tips, and company news delivered straight to your inbox." }]
+						}
+					]
+				}
+			]
+		}
+	],
+	"sections": [],
+	"bylines": [],
+	"content": {
+		"features": [
+			{
+				"id": "feature-tasks",
+				"slug": "task-management",
+				"status": "published",
+				"data": {
+					"title": "Task Management",
+					"description": "Create, assign, and track tasks with powerful filters, custom fields, and multiple views including kanban, list, and timeline.",
+					"icon": "📋"
+				}
+			},
+			{
+				"id": "feature-realtime",
+				"slug": "real-time-sync",
+				"status": "published",
+				"data": {
+					"title": "Real-time Sync",
+					"description": "Changes propagate instantly across all connected devices. See teammate cursors, live edits, and get notified the moment something changes.",
+					"icon": "⚡"
+				}
+			},
+			{
+				"id": "feature-automation",
+				"slug": "workflow-automation",
+				"status": "published",
+				"data": {
+					"title": "Workflow Automation",
+					"description": "Build custom automations with our visual builder. Auto-assign tasks, move items between stages, and trigger notifications without code.",
+					"icon": "🔄"
+				}
+			},
+			{
+				"id": "feature-docs",
+				"slug": "team-docs",
+				"status": "published",
+				"data": {
+					"title": "Team Docs",
+					"description": "Write beautiful documents with real-time collaboration, embedded tasks, and version history. Everything your team knows, in one place.",
+					"icon": "📝"
+				}
+			},
+			{
+				"id": "feature-integrations",
+				"slug": "integrations",
+				"status": "published",
+				"data": {
+					"title": "Integrations",
+					"description": "Connect with GitHub, Slack, Figma, Linear, and 100+ other tools. Two-way sync keeps everything up to date across your entire stack.",
+					"icon": "🔗"
+				}
+			},
+			{
+				"id": "feature-analytics",
+				"slug": "analytics-reports",
+				"status": "published",
+				"data": {
+					"title": "Analytics & Reports",
+					"description": "Track velocity, burndown, and cycle time with built-in dashboards. Export to CSV or connect to your BI tools via API.",
+					"icon": "📊"
+				}
+			}
+		],
+		"testimonials": [
+			{
+				"id": "testimonial-1",
+				"slug": "sarah-chen",
+				"status": "published",
+				"data": {
+					"quote": "Projectflow transformed how our engineering team works. We shipped 40% more features in Q3 after switching from our previous tool. The real-time collaboration alone is worth it.",
+					"author_name": "Sarah Chen",
+					"author_role": "VP of Engineering, TechCorp",
+					"author_image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face",
+							"alt": "Sarah Chen",
+							"filename": "sarah-chen.jpg"
+						}
+					}
+				}
+			},
+			{
+				"id": "testimonial-2",
+				"slug": "marcus-johnson",
+				"status": "published",
+				"data": {
+					"quote": "We evaluated every project management tool on the market. Projectflow was the only one that didn't require us to change how we work — it adapted to us. Our designers and developers finally use the same tool.",
+					"author_name": "Marcus Johnson",
+					"author_role": "Head of Product, DesignLab",
+					"author_image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
+							"alt": "Marcus Johnson",
+							"filename": "marcus-johnson.jpg"
+						}
+					}
+				}
+			},
+			{
+				"id": "testimonial-3",
+				"slug": "elena-rodriguez",
+				"status": "published",
+				"data": {
+					"quote": "The automation features saved us 15 hours per week on status updates and task routing alone. It's like having an extra team member who never sleeps and never forgets.",
+					"author_name": "Elena Rodriguez",
+					"author_role": "CTO, ScaleUp Inc",
+					"author_image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face",
+							"alt": "Elena Rodriguez",
+							"filename": "elena-rodriguez.jpg"
+						}
+					}
+				}
+			}
+		],
+		"pricing_plans": [
+			{
+				"id": "plan-free",
+				"slug": "free",
+				"status": "published",
+				"data": {
+					"name": "Free",
+					"price": "$0",
+					"description": "Perfect for individuals and small teams getting started.",
+					"features": "Up to 5 team members\n50 tasks per project\nBasic views (list & kanban)\n1 GB storage\nCommunity support\n7-day activity history",
+					"is_featured": false,
+					"cta_text": "Get started free",
+					"cta_url": "#"
+				}
+			},
+			{
+				"id": "plan-pro",
+				"slug": "pro",
+				"status": "published",
+				"data": {
+					"name": "Pro",
+					"price": "$12",
+					"description": "For growing teams that need more power and flexibility.",
+					"features": "Unlimited team members\nUnlimited tasks\nAll views including timeline & calendar\n100 GB storage\nWorkflow automation (50 rules)\nAdvanced analytics & reports\nPriority email support\nCustom fields & templates",
+					"is_featured": true,
+					"cta_text": "Start free trial",
+					"cta_url": "#"
+				}
+			},
+			{
+				"id": "plan-enterprise",
+				"slug": "enterprise",
+				"status": "published",
+				"data": {
+					"name": "Enterprise",
+					"price": "Custom",
+					"description": "For organizations that need advanced security and control.",
+					"features": "Everything in Pro\nUnlimited storage\nUnlimited automations\nSSO & SAML authentication\nAdvanced permissions & audit log\nDedicated account manager\n99.99% uptime SLA\nCustom integrations & API access",
+					"is_featured": false,
+					"cta_text": "Contact sales",
+					"cta_url": "/pages/about"
+				}
+			}
+		],
+		"faqs": [
+			{
+				"id": "faq-1",
+				"slug": "free-trial",
+				"status": "published",
+				"data": {
+					"question": "Is there a free trial for paid plans?",
+					"answer": "Yes! Every paid plan comes with a 14-day free trial. No credit card required to start. You can explore all Pro features and decide if it's right for your team before committing."
+				}
+			},
+			{
+				"id": "faq-2",
+				"slug": "migration",
+				"status": "published",
+				"data": {
+					"question": "Can I migrate from another project management tool?",
+					"answer": "Absolutely. We offer one-click importers for Jira, Asana, Trello, Monday, Linear, and Notion. For other tools, our CSV importer handles most formats. Our support team can also assist with custom migrations for Enterprise plans."
+				}
+			},
+			{
+				"id": "faq-3",
+				"slug": "team-size",
+				"status": "published",
+				"data": {
+					"question": "Is Projectflow suitable for large teams?",
+					"answer": "Projectflow scales from solo founders to organizations with thousands of users. Our Enterprise plan includes advanced permissions, SSO, and dedicated infrastructure to ensure performance at any scale."
+				}
+			},
+			{
+				"id": "faq-4",
+				"slug": "data-security",
+				"status": "published",
+				"data": {
+					"question": "How secure is my data?",
+					"answer": "We take security seriously. All data is encrypted at rest and in transit using AES-256 and TLS 1.3. We're SOC 2 Type II certified, GDPR compliant, and undergo regular third-party security audits. Enterprise plans include additional controls like IP allowlisting and custom data retention policies."
+				}
+			},
+			{
+				"id": "faq-5",
+				"slug": "cancel-anytime",
+				"status": "published",
+				"data": {
+					"question": "Can I cancel my subscription at any time?",
+					"answer": "Yes, you can cancel at any time from your account settings. When you cancel, you'll retain access until the end of your current billing period. We also offer a 30-day money-back guarantee if you're not satisfied."
+				}
+			}
+		],
+		"pages": [
+			{
+				"id": "about",
+				"slug": "about",
+				"status": "published",
+				"data": {
+					"title": "About Projectflow",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "Projectflow was founded in 2024 with a simple mission: make project management feel effortless. We believe that the best tools get out of your way and let you focus on the work that matters." }]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [{ "_type": "span", "text": "Our Story" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "After years of building products at fast-growing startups, our founding team experienced firsthand how broken project management tools could slow down even the most talented teams. We set out to build something better — a tool that combines the power of enterprise software with the simplicity of a great consumer product." }]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [{ "_type": "span", "text": "Our Values" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{ "_type": "span", "text": "Speed matters.", "marks": ["strong"] },
+								{ "_type": "span", "text": " Everything in Projectflow is optimized for performance. From sub-50ms page loads to instant real-time sync, we obsess over every millisecond." }
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{ "_type": "span", "text": "Simplicity wins.", "marks": ["strong"] },
+								{ "_type": "span", "text": " We'd rather remove a feature than add complexity. Every interaction should feel intuitive, even for first-time users." }
+							]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{ "_type": "span", "text": "Teams first.", "marks": ["strong"] },
+								{ "_type": "span", "text": " Collaboration isn't an afterthought — it's the foundation. We build for teams, not individuals working in silos." }
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "privacy",
+				"slug": "privacy",
+				"status": "published",
+				"data": {
+					"title": "Privacy Policy",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "Last updated: January 1, 2025" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "At Projectflow, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our service." }]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [{ "_type": "span", "text": "Information We Collect" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "We collect information you provide directly to us, such as when you create an account, use our services, or contact us for support. This may include your name, email address, and usage data." }]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [{ "_type": "span", "text": "How We Use Your Information" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "We use the information we collect to provide, maintain, and improve our services, to communicate with you, and to comply with legal obligations." }]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [{ "_type": "span", "text": "Contact Us" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "If you have any questions about this Privacy Policy, please contact us at privacy@projectflow.app." }]
+						}
+					]
+				}
+			},
+			{
+				"id": "terms",
+				"slug": "terms",
+				"status": "published",
+				"data": {
+					"title": "Terms of Service",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "Last updated: January 1, 2025" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "These Terms of Service govern your use of Projectflow. By accessing or using our service, you agree to be bound by these terms." }]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [{ "_type": "span", "text": "Use of Service" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "You may use Projectflow only for lawful purposes and in accordance with these Terms. You agree not to use the service in any way that violates any applicable law or regulation." }]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [{ "_type": "span", "text": "Accounts" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You agree to notify us immediately of any unauthorized use." }]
+						},
+						{
+							"_type": "block",
+							"style": "h2",
+							"children": [{ "_type": "span", "text": "Limitation of Liability" }]
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [{ "_type": "span", "text": "To the maximum extent permitted by law, Projectflow shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or relating to your use of the service." }]
+						}
+					]
+				}
+			}
+		]
+	}
+}

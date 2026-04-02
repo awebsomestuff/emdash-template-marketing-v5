@@ -1,0 +1,80 @@
+---
+---
+
+<section class="logo-cloud">
+	<div class="container">
+		<p class="logo-cloud-label reveal">Trusted by forward-thinking teams at</p>
+		<div class="logo-track">
+			<div class="logo-track-inner">
+				<div class="logo-item"><svg viewBox="0 0 120 30" fill="currentColor"><rect x="0" y="8" width="30" height="14" rx="3"/><text x="38" y="22" font-size="16" font-weight="600" font-family="var(--font-heading)">Acme</text></svg></div>
+				<div class="logo-item"><svg viewBox="0 0 130 30" fill="currentColor"><circle cx="15" cy="15" r="12"/><text x="34" y="22" font-size="16" font-weight="600" font-family="var(--font-heading)">Globex</text></svg></div>
+				<div class="logo-item"><svg viewBox="0 0 140 30" fill="currentColor"><polygon points="15,2 28,28 2,28"/><text x="36" y="22" font-size="16" font-weight="600" font-family="var(--font-heading)">Initech</text></svg></div>
+				<div class="logo-item"><svg viewBox="0 0 150 30" fill="currentColor"><rect x="2" y="2" width="26" height="26" rx="6" fill="none" stroke="currentColor" stroke-width="3"/><text x="36" y="22" font-size="16" font-weight="600" font-family="var(--font-heading)">Hooli</text></svg></div>
+				<div class="logo-item"><svg viewBox="0 0 160 30" fill="currentColor"><path d="M15 2 L28 15 L15 28 L2 15 Z"/><text x="36" y="22" font-size="16" font-weight="600" font-family="var(--font-heading)">Massive</text></svg></div>
+				<div class="logo-item"><svg viewBox="0 0 150 30" fill="currentColor"><circle cx="8" cy="15" r="6"/><circle cx="22" cy="15" r="6"/><text x="36" y="22" font-size="16" font-weight="600" font-family="var(--font-heading)">Pied Piper</text></svg></div>
+				<!-- Duplicate for seamless loop -->
+				<div class="logo-item"><svg viewBox="0 0 120 30" fill="currentColor"><rect x="0" y="8" width="30" height="14" rx="3"/><text x="38" y="22" font-size="16" font-weight="600" font-family="var(--font-heading)">Acme</text></svg></div>
+				<div class="logo-item"><svg viewBox="0 0 130 30" fill="currentColor"><circle cx="15" cy="15" r="12"/><text x="34" y="22" font-size="16" font-weight="600" font-family="var(--font-heading)">Globex</text></svg></div>
+				<div class="logo-item"><svg viewBox="0 0 140 30" fill="currentColor"><polygon points="15,2 28,28 2,28"/><text x="36" y="22" font-size="16" font-weight="600" font-family="var(--font-heading)">Initech</text></svg></div>
+				<div class="logo-item"><svg viewBox="0 0 150 30" fill="currentColor"><rect x="2" y="2" width="26" height="26" rx="6" fill="none" stroke="currentColor" stroke-width="3"/><text x="36" y="22" font-size="16" font-weight="600" font-family="var(--font-heading)">Hooli</text></svg></div>
+				<div class="logo-item"><svg viewBox="0 0 160 30" fill="currentColor"><path d="M15 2 L28 15 L15 28 L2 15 Z"/><text x="36" y="22" font-size="16" font-weight="600" font-family="var(--font-heading)">Massive</text></svg></div>
+				<div class="logo-item"><svg viewBox="0 0 150 30" fill="currentColor"><circle cx="8" cy="15" r="6"/><circle cx="22" cy="15" r="6"/><text x="36" y="22" font-size="16" font-weight="600" font-family="var(--font-heading)">Pied Piper</text></svg></div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.logo-cloud {
+		padding-block: var(--space-16);
+		border-bottom: 1px solid var(--color-border);
+		overflow: hidden;
+	}
+
+	.logo-cloud-label {
+		text-align: center;
+		font-size: var(--text-sm);
+		font-weight: 500;
+		color: var(--color-text-muted);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		margin-bottom: var(--space-8);
+	}
+
+	.logo-track {
+		position: relative;
+		width: 100%;
+		overflow: hidden;
+		mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+		-webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+	}
+
+	.logo-track-inner {
+		display: flex;
+		gap: var(--space-12);
+		width: max-content;
+		animation: scroll-logos 30s linear infinite;
+	}
+
+	.logo-item {
+		flex-shrink: 0;
+		height: 30px;
+		color: var(--color-text-muted);
+		opacity: 0.5;
+		transition: opacity var(--transition-base);
+	}
+
+	.logo-item svg {
+		height: 100%;
+		width: auto;
+	}
+
+	.logo-item:hover {
+		opacity: 0.8;
+	}
+
+	@media (max-width: 768px) {
+		.logo-cloud { padding-block: var(--space-10); }
+		.logo-track-inner { gap: var(--space-8); }
+	}
+</style>

@@ -1,0 +1,27 @@
+---
+import { getSiteSettings } from "emdash";
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import LogoCloud from "../components/LogoCloud.astro";
+import Features from "../components/Features.astro";
+import Benefits from "../components/Benefits.astro";
+import Testimonials from "../components/Testimonials.astro";
+import Pricing from "../components/Pricing.astro";
+import FAQ from "../components/FAQ.astro";
+import CTASection from "../components/CTASection.astro";
+
+const settings = await getSiteSettings();
+const title = settings.title || "Projectflow";
+const tagline = settings.tagline || "The modern way to manage projects";
+---
+
+<Base title={title} description={tagline}>
+	<Hero />
+	<LogoCloud />
+	<Features />
+	<Benefits />
+	<Testimonials />
+	<Pricing />
+	<FAQ />
+	<CTASection />
+</Base>

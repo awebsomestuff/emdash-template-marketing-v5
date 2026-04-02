@@ -1,0 +1,23 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "emdash-template-marketing-v5",
+	"main": "./src/worker.ts",
+	"compatibility_date": "2026-03-29",
+	"compatibility_flags": ["nodejs_compat"],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "emdash-template-marketing","database_id": "4f8c38a7-e4ce-407b-a998-990ef0dfd46b",
+			// Run `wrangler d1 create emdash-template-marketing` and paste the ID here
+		},
+	],
+	"r2_buckets": [
+		{
+			"binding": "MEDIA",
+			"bucket_name": "emdash-template-marketing-media","preview_bucket_name": "emdash-template-marketing-media",
+		},
+	],
+	"observability": {
+		"enabled": true,
+	},
+}

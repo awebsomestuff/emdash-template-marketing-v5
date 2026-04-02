@@ -1,0 +1,364 @@
+---
+import { getSiteSettings } from "emdash";
+
+const settings = await getSiteSettings();
+const title = settings.title || "Projectflow";
+const tagline = settings.tagline || "The modern way to manage projects";
+---
+
+<section class="hero" id="hero">
+	<div class="hero-bg">
+		<div class="hero-glow hero-glow-1"></div>
+		<div class="hero-glow hero-glow-2"></div>
+		<div class="hero-grid-pattern"></div>
+	</div>
+
+	<div class="container hero-content">
+		<div class="hero-badge reveal">
+			<span class="badge-dot"></span>
+			Now in public beta — try it free
+		</div>
+
+		<h1 class="hero-title reveal reveal-delay-1">
+			Ship projects<br />
+			<span class="gradient-text">10x faster</span>
+		</h1>
+
+		<p class="hero-subtitle reveal reveal-delay-2">
+			{tagline}. {title} brings your team's tasks, docs, and workflows into one
+			blazing-fast workspace — so you can focus on building, not managing.
+		</p>
+
+		<div class="hero-actions reveal reveal-delay-3">
+			<a href="#pricing" class="btn btn-primary btn-lg">
+				Start for free
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+					<line x1="5" y1="12" x2="19" y2="12"></line>
+					<polyline points="12 5 19 12 12 19"></polyline>
+				</svg>
+			</a>
+			<a href="#features" class="btn btn-secondary btn-lg">
+				See how it works
+			</a>
+		</div>
+
+		<div class="hero-visual reveal reveal-delay-4">
+			<div class="hero-mockup">
+				<div class="mockup-bar">
+					<span class="mockup-dot"></span>
+					<span class="mockup-dot"></span>
+					<span class="mockup-dot"></span>
+					<span class="mockup-title">{title} — Dashboard</span>
+				</div>
+				<div class="mockup-body">
+					<div class="mockup-sidebar">
+						<div class="mockup-sidebar-item active"></div>
+						<div class="mockup-sidebar-item"></div>
+						<div class="mockup-sidebar-item"></div>
+						<div class="mockup-sidebar-item"></div>
+						<div class="mockup-sidebar-item"></div>
+					</div>
+					<div class="mockup-main">
+						<div class="mockup-header-row"></div>
+						<div class="mockup-cards">
+							<div class="mockup-card">
+								<div class="mockup-card-tag blue"></div>
+								<div class="mockup-card-line"></div>
+								<div class="mockup-card-line short"></div>
+							</div>
+							<div class="mockup-card">
+								<div class="mockup-card-tag purple"></div>
+								<div class="mockup-card-line"></div>
+								<div class="mockup-card-line short"></div>
+							</div>
+							<div class="mockup-card">
+								<div class="mockup-card-tag green"></div>
+								<div class="mockup-card-line"></div>
+								<div class="mockup-card-line short"></div>
+							</div>
+							<div class="mockup-card">
+								<div class="mockup-card-tag blue"></div>
+								<div class="mockup-card-line"></div>
+								<div class="mockup-card-line short"></div>
+							</div>
+							<div class="mockup-card">
+								<div class="mockup-card-tag purple"></div>
+								<div class="mockup-card-line"></div>
+								<div class="mockup-card-line short"></div>
+							</div>
+							<div class="mockup-card">
+								<div class="mockup-card-tag green"></div>
+								<div class="mockup-card-line"></div>
+								<div class="mockup-card-line short"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.hero {
+		position: relative;
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		padding-top: calc(var(--nav-height) + var(--space-8));
+		padding-bottom: var(--space-16);
+		overflow: hidden;
+		background: var(--hero-bg-start);
+		color: #f1f5f9;
+	}
+
+	.hero-bg {
+		position: absolute;
+		inset: 0;
+		overflow: hidden;
+	}
+
+	.hero-glow {
+		position: absolute;
+		border-radius: 50%;
+		filter: blur(120px);
+		animation: pulse-glow 6s ease-in-out infinite;
+	}
+
+	.hero-glow-1 {
+		width: 600px;
+		height: 600px;
+		background: var(--hero-glow-1);
+		top: -10%;
+		right: -5%;
+	}
+
+	.hero-glow-2 {
+		width: 500px;
+		height: 500px;
+		background: var(--hero-glow-2);
+		bottom: -10%;
+		left: -5%;
+		animation-delay: 3s;
+	}
+
+	.hero-grid-pattern {
+		position: absolute;
+		inset: 0;
+		background-image:
+			linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+		background-size: 60px 60px;
+		mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+		-webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+	}
+
+	.hero-content {
+		position: relative;
+		z-index: 1;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.hero-badge {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-2);
+		padding: var(--space-2) var(--space-4);
+		font-size: var(--text-sm);
+		font-weight: 500;
+		color: rgba(255, 255, 255, 0.8);
+		background: rgba(255, 255, 255, 0.08);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: var(--radius-full);
+		margin-bottom: var(--space-8);
+	}
+
+	.badge-dot {
+		width: 8px;
+		height: 8px;
+		background: var(--color-success);
+		border-radius: 50%;
+		animation: pulse-glow 2s ease-in-out infinite;
+	}
+
+	.hero-title {
+		font-size: var(--text-7xl);
+		font-weight: 700;
+		line-height: 1.05;
+		margin-bottom: var(--space-6);
+		color: #ffffff;
+	}
+
+	.gradient-text {
+		background: linear-gradient(135deg, #60a5fa, #a78bfa, #60a5fa);
+		background-size: 200% auto;
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+		animation: gradient-shift 4s ease-in-out infinite;
+	}
+
+	.hero-subtitle {
+		font-size: var(--text-xl);
+		line-height: var(--leading-relaxed);
+		color: rgba(255, 255, 255, 0.6);
+		max-width: 600px;
+		margin-bottom: var(--space-10);
+	}
+
+	.hero-actions {
+		display: flex;
+		gap: var(--space-4);
+		margin-bottom: var(--space-16);
+	}
+
+	.hero-actions .btn-secondary {
+		background: rgba(255, 255, 255, 0.08);
+		color: rgba(255, 255, 255, 0.9);
+		border-color: rgba(255, 255, 255, 0.15);
+	}
+
+	.hero-actions .btn-secondary:hover {
+		background: rgba(255, 255, 255, 0.12);
+		border-color: rgba(255, 255, 255, 0.25);
+	}
+
+	.hero-visual {
+		width: 100%;
+		max-width: 900px;
+		perspective: 1200px;
+	}
+
+	/* --- Dashboard Mockup --- */
+	.hero-mockup {
+		background: #111827;
+		border-radius: var(--radius-xl);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		box-shadow:
+			0 25px 50px -12px rgba(0, 0, 0, 0.5),
+			0 0 80px rgba(59, 130, 246, 0.1);
+		overflow: hidden;
+		animation: float 6s ease-in-out infinite;
+	}
+
+	.mockup-bar {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+		padding: var(--space-3) var(--space-4);
+		background: #0d1117;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+	}
+
+	.mockup-dot {
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.15);
+	}
+
+	.mockup-dot:nth-child(1) { background: #ff5f57; }
+	.mockup-dot:nth-child(2) { background: #febc2e; }
+	.mockup-dot:nth-child(3) { background: #28c840; }
+
+	.mockup-title {
+		margin-left: var(--space-4);
+		font-size: var(--text-xs);
+		color: rgba(255, 255, 255, 0.4);
+	}
+
+	.mockup-body {
+		display: flex;
+		min-height: 320px;
+	}
+
+	.mockup-sidebar {
+		width: 180px;
+		padding: var(--space-4);
+		border-right: 1px solid rgba(255, 255, 255, 0.06);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+	}
+
+	.mockup-sidebar-item {
+		height: 32px;
+		border-radius: var(--radius-sm);
+		background: rgba(255, 255, 255, 0.04);
+	}
+
+	.mockup-sidebar-item.active {
+		background: rgba(59, 130, 246, 0.2);
+		border: 1px solid rgba(59, 130, 246, 0.3);
+	}
+
+	.mockup-main {
+		flex: 1;
+		padding: var(--space-4);
+	}
+
+	.mockup-header-row {
+		height: 28px;
+		width: 40%;
+		background: rgba(255, 255, 255, 0.06);
+		border-radius: var(--radius-sm);
+		margin-bottom: var(--space-4);
+	}
+
+	.mockup-cards {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--space-3);
+	}
+
+	.mockup-card {
+		padding: var(--space-3);
+		background: rgba(255, 255, 255, 0.04);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		border-radius: var(--radius);
+	}
+
+	.mockup-card-tag {
+		width: 40px;
+		height: 6px;
+		border-radius: 3px;
+		margin-bottom: var(--space-3);
+	}
+
+	.mockup-card-tag.blue { background: #3b82f6; }
+	.mockup-card-tag.purple { background: #8b5cf6; }
+	.mockup-card-tag.green { background: #10b981; }
+
+	.mockup-card-line {
+		height: 8px;
+		background: rgba(255, 255, 255, 0.08);
+		border-radius: 4px;
+		margin-bottom: var(--space-2);
+	}
+
+	.mockup-card-line.short {
+		width: 60%;
+	}
+
+	@media (max-width: 768px) {
+		.hero {
+			min-height: auto;
+			padding-top: calc(var(--nav-height) + var(--space-12));
+			padding-bottom: var(--space-12);
+		}
+		.hero-actions {
+			flex-direction: column;
+			width: 100%;
+			max-width: 320px;
+		}
+		.mockup-sidebar {
+			display: none;
+		}
+		.mockup-cards {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+</style>

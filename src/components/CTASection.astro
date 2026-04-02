@@ -1,0 +1,116 @@
+---
+---
+
+<section class="cta-section">
+	<div class="cta-bg">
+		<div class="cta-glow cta-glow-1"></div>
+		<div class="cta-glow cta-glow-2"></div>
+	</div>
+	<div class="container cta-content reveal">
+		<h2 class="cta-title">Ready to ship faster?</h2>
+		<p class="cta-description">
+			Join thousands of teams who've already made the switch.
+			Start free — no credit card required.
+		</p>
+		<div class="cta-actions">
+			<a href="#pricing" class="btn btn-primary btn-lg">
+				Get started for free
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+					<line x1="5" y1="12" x2="19" y2="12"></line>
+					<polyline points="12 5 19 12 12 19"></polyline>
+				</svg>
+			</a>
+			<a href="/pages/about" class="btn btn-secondary btn-lg cta-btn-secondary">
+				Talk to sales
+			</a>
+		</div>
+	</div>
+</section>
+
+<style>
+	.cta-section {
+		position: relative;
+		padding-block: var(--space-24);
+		background: var(--hero-bg-start);
+		color: #f1f5f9;
+		overflow: hidden;
+		text-align: center;
+	}
+
+	.cta-bg {
+		position: absolute;
+		inset: 0;
+	}
+
+	.cta-glow {
+		position: absolute;
+		border-radius: 50%;
+		filter: blur(100px);
+		animation: pulse-glow 6s ease-in-out infinite;
+	}
+
+	.cta-glow-1 {
+		width: 400px;
+		height: 400px;
+		background: var(--hero-glow-1);
+		top: -20%;
+		left: 10%;
+	}
+
+	.cta-glow-2 {
+		width: 300px;
+		height: 300px;
+		background: var(--hero-glow-2);
+		bottom: -20%;
+		right: 10%;
+		animation-delay: 3s;
+	}
+
+	.cta-content {
+		position: relative;
+		z-index: 1;
+		max-width: 640px;
+		margin-inline: auto;
+	}
+
+	.cta-title {
+		font-size: var(--text-5xl);
+		font-weight: 700;
+		margin-bottom: var(--space-4);
+		color: #ffffff;
+	}
+
+	.cta-description {
+		font-size: var(--text-xl);
+		line-height: var(--leading-relaxed);
+		color: rgba(255, 255, 255, 0.6);
+		margin-bottom: var(--space-10);
+	}
+
+	.cta-actions {
+		display: flex;
+		gap: var(--space-4);
+		justify-content: center;
+	}
+
+	.cta-btn-secondary {
+		background: rgba(255, 255, 255, 0.08);
+		color: rgba(255, 255, 255, 0.9);
+		border-color: rgba(255, 255, 255, 0.15);
+	}
+
+	.cta-btn-secondary:hover {
+		background: rgba(255, 255, 255, 0.12);
+		border-color: rgba(255, 255, 255, 0.25);
+	}
+
+	@media (max-width: 768px) {
+		.cta-section {
+			padding-block: var(--space-16);
+		}
+		.cta-actions {
+			flex-direction: column;
+			align-items: center;
+		}
+	}
+</style>
